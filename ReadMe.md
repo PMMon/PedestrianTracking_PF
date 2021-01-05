@@ -24,7 +24,7 @@ If you find this code useful for your research, please cite it as:
 
 ```
 @ARTICLE{MondorfPFTracking,
-    author = {Philipp Mondorf},
+    author = {P. {Mondorf} and T. {Labourdette-Liaresq} and D. {Singh}},
     title = {Pedestrian Tracking in Video Sequences using Particle Filters},
     journal={Technical Report},
     year = {2021}
