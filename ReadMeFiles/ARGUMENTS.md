@@ -33,7 +33,7 @@ You can configure the behavior of the script by a variety of command-line flags:
 * `--sigma_m`: Specify variance of momentum-based observation model. Default is 0.5.
 * `--beta`: Specify value for weight importance of fusion process. Default is 0.5.
 
-# Configurations for resampling
+## Configurations for resampling
 * `--resampling`: Specify which resampling method to use. Default is `SYS`.
 
 ## Configurations for video generation
