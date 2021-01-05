@@ -97,7 +97,7 @@ A new for the video can be defined using the command-line flag `--vid_name`. An 
 
 ![Color-based Tracking Results](<ReadMeFiles/GIFs/ParticleFilter_CLR_particles.gif>)
 
-Tracking results of the ICM tracking system, evaluated on a dataset from the BoBoT benchmark [[1]](#1)
+Tracking results of the color-based particle filter approach. Particle states are also displayed.
 
 <br />
 
