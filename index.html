@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="h3eRnofjZUPwVq2zDPSYoYKaV3V_nnZ18d4_x_UyE-Q" />
+
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Pedestrian Tracking in Video Sequences using Particle Filters | PedestrianTracking_PF</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Pedestrian Tracking in Video Sequences using Particle Filters" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://pmmon.github.io/PedestrianTracking_PF/" />
+<meta property="og:url" content="https://pmmon.github.io/PedestrianTracking_PF/" />
+<meta property="og:site_name" content="PedestrianTracking_PF" />
+<script type="application/ld+json">
+{"@type":"WebSite","url":"https://pmmon.github.io/PedestrianTracking_PF/","name":"PedestrianTracking_PF","headline":"Pedestrian Tracking in Video Sequences using Particle Filters","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/PedestrianTracking_PF/assets/css/style.css?v=bab08e050ba8d53ccf7737cc557afe7e1671542d">
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://pmmon.github.io/PedestrianTracking_PF/">PedestrianTracking_PF</a></h1>
+      
+
+      <h1 id="pedestrian-tracking-in-video-sequences-using-particle-filters">Pedestrian Tracking in Video Sequences using Particle Filters</h1>
+
+<p>This is the code for the project report:</p>
+
+<p>P. Mondorf, T. Labourdette-Liaresq and D. Singh: <a href="/PedestrianTracking_PF/EL2320_ProjectReport_PhilippMondorf.pdf">Pedestrian Tracking in Video Sequences using Particle Filters</a>, Project Report, Division of Robotics, Perception and Learning, KTH Royal Institute of Technology, 2021.</p>
+
+<p>In this work, we evaluate and compare three different methods for pedestrian tracking in video sequences
+using particle filters. Particle filters have become popular tools in solving visual tracking tasks as they are capable of handling complex non-linear motions and non-Gaussian distributions. For this work, two particle filter
+approaches are implemented that use different image features to compare the target pedestrian with respective state estimates. While the first technique is based on HSV color histograms, the
+second method makes use of moment invariants. By combining the two particle filter approaches, we are able to create a third
+tracking system that benefits from the advantages of both former techniques. We evaluate the introduced methods on a challenging dataset from the BoBoT benchmark for visual object tracking <a href="#1">[1]</a>.</p>
+
+<p>Below we show tracking results of our fused particle filter approach. We further illustrate two error measurements for the estimated state. For details, please see the above mentioned paper.
+<br /></p>
+
+<p><img src="ReadMeFiles/GIFs/ParticleFilter_ICM_model.gif" alt="ICM Tracking Results" /></p>
+
+<p>Tracking results of the ICM tracking system, evaluated on a dataset from the BoBoT benchmark <a href="#1">[1]</a></p>
+
+<p><br /></p>
+
+<p>If you find this code useful for your research, please cite it as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@ARTICLE{MondorfPFTracking,
+    author = {P. {Mondorf} and T. {Labourdette-Liaresq} and D. {Singh}},
+    title = {Pedestrian Tracking in Video Sequences using Particle Filters},
+    journal={Technical Report},
+    year = {2021}
+}
+</code></pre></div></div>
+
+<h2 id="setup">Setup</h2>
+<p>All code was developed and tested on Windows 10 with Python 3.7.</p>
+
+<p>To run the current code, we recommend to setup a virtual environment:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> venv <span class="nb">env</span>                     <span class="c"># Create virtual environment</span>
+<span class="nb">source env</span>/bin/activate                 <span class="c"># Activate virtual environment</span>
+pip <span class="nb">install</span> <span class="nt">-r</span> requirements.txt         <span class="c"># Install dependencies</span>
+<span class="c"># Work for a while</span>
+deactivate                              <span class="c"># Deactivate virtual environment</span>
+</code></pre></div></div>
+
+<h2 id="particle-filters-for-pedestrian-tracking">Particle Filters for Pedestrian Tracking</h2>
+
+<p>The code in the folder <a href="ParticleFilter">ParticleFilter</a> implements three different particle filter approaches for pedestrian tracking.
+These approaches use different image features to compare the target pedestrian with respective state estimates, i.e. they differ in their observation model:</p>
+
+<ul>
+  <li>CLR: based on HSV color histograms</li>
+  <li>MMT: based on moment invariants</li>
+  <li>ICM: combination of both former methods</li>
+</ul>
+
+<h3 id="track-pedestrian-using-default-settings">Track Pedestrian using default Settings</h3>
+
+<p>In order to run the code, navigate to this folder in your command shell and run the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python ParticleFilter/PFTracking.py
+</code></pre></div></div>
+
+<p>This will track the pedestrian using an implementation of the color-based particle filter approach with N = 100 particles. 
+It is possible to configure the tracking process by using command-line flags. A detailed explanation of these flags can be found <a href="/PedestrianTracking_PF/ReadMeFiles/ARGUMENTS.html">here</a>.</p>
+
+<h3 id="track-pedestrian-using-command-line-flags">Track Pedestrian using command-line flags</h3>
+
+<p>Command-line flags can be defined using the <code class="language-plaintext highlighter-rouge">--variable_name</code> expression in the command shell. To see a list of all available parameters run the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python ParticleFilter/PFTracking.py --help
+</code></pre></div></div>
+
+<h3 id="example---determine-number-of-particles">Example - Determine Number of Particles</h3>
+
+<p>As an example, we specify to track the pedestrian using a moment-based particle filter approach with N = 50 particles. 
+This can be done by running the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python ParticleFilter/PFTracking.py --OM MMT --N 50
+</code></pre></div></div>
+
+<h3 id="example---create-video-with-particles">Example - Create Video with Particles</h3>
+
+<p>To create a video that shows the underlying particles, simply set the parameter <code class="language-plaintext highlighter-rouge">--video</code> and the parameter 
+<code class="language-plaintext highlighter-rouge">--show_part</code> to <code class="language-plaintext highlighter-rouge">True</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python ParticleFilter/PFTracking.py --video True --show_part True
+</code></pre></div></div>
+
+<p>A new for the video can be defined using the command-line flag <code class="language-plaintext highlighter-rouge">--vid_name</code>. An example of such a generated video is shown below:</p>
+
+<p><br /></p>
+
+<p><img src="ReadMeFiles/GIFs/ParticleFilter_CLR_particles.gif" alt="Color-based Tracking Results" /></p>
+
+<p>Tracking results of the color-based particle filter approach. Particle states are also displayed.</p>
+
+<p><br /></p>
+
+<h2 id="create-videos-from-gt">Create videos from GT</h2>
+
+<p>It is also possible to generate a video of the dataset from the given frames. For this, run the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python GT_Preparation/RunPrep.py
+</code></pre></div></div>
+
+<p>If you want to visualize bounding boxes, please ensure that the variable <code class="language-plaintext highlighter-rouge">annotate</code> is set to <code class="language-plaintext highlighter-rouge">True</code>. Also, make sure that you have specified the input and output paths correctly.</p>
+
+<h2 id="references">References</h2>
+<p><a id="1">[1]</a>  D. A. Klein. “Bobot - bonn benchmark on tracking”. In: Technical Report (2010).</p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    
+  </body>
+</html>
